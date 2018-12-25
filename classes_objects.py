@@ -35,3 +35,14 @@ car2.value = 10000.0
 # test code
 print(car1.description())
 print(car2.description())
+
+class Spell:
+  def __init__(self):
+    self.name = "Not defined yet"
+  def set_name(self, new_name):
+    self.name = new_name
+
+spell = Spell()
+print(spell.name)
+spell.set_name("Workious")
+print(spell.name)
