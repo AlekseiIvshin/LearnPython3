@@ -14,21 +14,18 @@ class ArrayQueue:
         return "%s" % self.queue
 
     def push(self, item):
-        if self.count >= self.capacity:
+        if self.count + 1 >= self.capacity:
             self._resize()
-        if self.tail >= self.capacity:
-            self.tail = 0 
-        self.queue[self.tail], self.tail = item, self.tail + 1 
+        self.queue[self.tail] = item
+        self.tail = (self.tail+1) % self.capacity
         self.count += 1
     
     def pop(self):
         if self.head == self.tail:
             return None
-        res = self.queue[self.head ] 
+        res = self.queue[self.head] 
         self.queue[self.head] = None
-        self.head += 1
-        if self.head >= self.capacity:
-            self.head = 0  
+        self.head = (self.head + 1 ) % self.capacity
         self.count -= 1
         return res
 
@@ -60,6 +57,9 @@ print(arrayQueue.pop())
 arrayQueue.push(5)
 arrayQueue.push(6)
 arrayQueue.push(7)
+print(arrayQueue.pop())
+print(arrayQueue.pop())
 arrayQueue.push(8)
+arrayQueue.push(9)
 
 print(arrayQueue)
