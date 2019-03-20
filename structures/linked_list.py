@@ -1,4 +1,4 @@
-class LinkedListNode:
+class Node:
 
     def __init__(self, value):
         self.value = value
@@ -7,11 +7,11 @@ class LinkedListNode:
 
 class LinkedList:
     def __init__(self, value):
-        self.head = LinkedListNode(value)
+        self.head = Node(value)
         self.tail = self.head
     
     def addLast(self, value):
-        next = LinkedListNode(value)
+        next = Node(value)
         next.prev = self.tail
         self.tail.next = next
         self.tail = next
@@ -23,7 +23,7 @@ class LinkedList:
         return last
     
     def addFirst(self, value):
-        prev = LinkedListNode(value)
+        prev = Node(value)
         self.head.prev = prev
         prev.next = self.head
         self.head = prev
@@ -41,6 +41,26 @@ class LinkedList:
             cur = cur.next
             i += 1
         return cur
+
+    def insertAt(self, index, value):
+        cur = self.atIndex(index)
+        if cur:
+            v = Node(value)
+            v.prev = cur 
+            v.next = cur.next
+            if cur.next:
+                cur.next.prev = v
+            cur.next = v
+    
+    def removeAt(self, index):
+        cur = self.atIndex(index)
+        if cur:
+            prev = cur.prev
+            next = cur.next
+            if prev:
+                prev.next = next
+            if next:
+                next.prev = prev
 
     @staticmethod
     def forEach(linked_list, predicate):
@@ -68,6 +88,8 @@ LinkedList.printNode(head.popLast())
 LinkedList.printNode(head.popFirst())
 LinkedList.printNode(head.popLast())
 
+head.insertAt(0,10)
+head.removeAt(0)
 
 LinkedList.print(head)
 

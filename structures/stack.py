@@ -7,7 +7,6 @@ class Stack:
 
     def __init__(self):
         self.head = None
-        self.tail = None
 
     def __str__(self):
         cur = self.head
@@ -21,7 +20,7 @@ class Stack:
     def push(self, value):
         t = Node(value)
         if self.head == None:
-            self.head, self.tail = t,t
+            self.head = t
         else:
             t.next, self.head = self.head, t
         return self
